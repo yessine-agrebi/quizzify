@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column,OneToMany, ManyToOne, JoinColumn} from "typeorm"
 import { Quizcategories } from "./quiz_categories.entity";
+import { Questions } from "./question.entity";
 @Entity()
 export class Quiz {
     @PrimaryGeneratedColumn()
@@ -13,4 +14,6 @@ export class Quiz {
     @ManyToOne(() => Quizcategories)
     @JoinColumn({ name: "category_id" })
     category: Quizcategories;
+    @OneToMany(() => Questions, question => question.quiz)
+    questions: Questions[];
 }
